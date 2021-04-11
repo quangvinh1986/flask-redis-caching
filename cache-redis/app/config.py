@@ -92,7 +92,7 @@ class ApiAppConfig(DefaultConfig):
     RESULT_BACKEND = REDIS_URL
     BROKER_URL = REDIS_URL
     # </editor-fold>
-
+    CACHE_DEPARTMENT_KEY = "CACHE_DEPARTMENT_KEY"
 
 class TestingConfig(ApiAppConfig):
     TESTING = True

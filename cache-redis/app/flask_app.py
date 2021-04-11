@@ -6,7 +6,7 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask_log_request_id import RequestID
 from werkzeug.exceptions import default_exceptions
-from app.sys_libs.exceptions import api_error_handler
+from .sys_libs.exceptions import api_error_handler
 from . import api
 from .web_route import configure_route
 
@@ -70,7 +70,7 @@ def configure_extensions(app):
 
     # TODO: remove in PRODUCTION
     from .extensions import cors
-    cors.init_app(app, resources={r"/my-api/*": {"origins": "*"}, r"/geo-location-/*": {"origins": "*"}})
+    cors.init_app(app, resources={r"/my-api/*": {"origins": "*"}, r"/caching-/*": {"origins": "*"}})
 
 
 def configure_blueprints(app):

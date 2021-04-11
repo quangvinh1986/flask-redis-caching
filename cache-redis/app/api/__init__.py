@@ -1,5 +1,6 @@
 from flask import Blueprint
 from .common import health_check
+from .hr import department_api
 from .task import task_api
 
 
