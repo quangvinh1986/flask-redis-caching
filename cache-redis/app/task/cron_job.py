@@ -10,5 +10,10 @@ CRON_JOBS = {
         'task': 'auto_check_hire_date',
         'schedule': crontab(day_of_week='mon-sun', hour=8, minute=00),
         'args': (),
-    }
+    },
+    'reload_department_cache': {
+        'task': 'reload_department_cache',
+        'schedule': crontab(day_of_week='mon-sun', hour=3, minute=00),
+        'args': (),
+    },
 }

@@ -1,16 +1,18 @@
+import json
 import logging
-import os
 from datetime import datetime
 from .celery_app import celery
 from .back_ground.common_task import CommonTask
 from .back_ground.notice_task import EmailNotice
-from .back_ground.employee_task import EmployeeTask
+from .back_ground.hr_task.employee_task import EmployeeTask
+from .back_ground.cache.hr_cache_task import HRCacheTask
 
 logger = logging.getLogger(__name__)
 
 common_task = CommonTask(celery.conf)
 email_notice = EmailNotice(celery.conf)
 employee_task = EmployeeTask(celery.conf)
+hr_cache_task = HRCacheTask(celery.conf)
 
 
 @celery.task(name='daily_health_check')
@@ -57,3 +59,29 @@ def send_birthday_email(list_employee: list):
         logger.info("send_birthday_email DONE")
     except Exception as ex:
         logger.error("send_birthday_email task fail " + str(ex.__str__()))
+
+
+@celery.task(name='reload_department_cache')
+def reload_department_cache():
+    """
+    auto reload cache by cron-job
+
+    """
+    try:
+        result = hr_cache_task.reload_department_cache()
+        logger.info("reload_department_cache result: {}".format(json.dumps(result)))
+    except Exception as ex:
+        logger.error("reload_department_cache task fail " + str(ex.__str__()))
+
+
+@celery.task(name='get_departments')
+def get_departments():
+    """
+    get all department from cache or database
+
+    """
+    try:
+        result = hr_cache_task.get_derpartment()
+        logger.info("get_departments result: {}".format(json.dumps(result)))
+    except Exception as ex:
+        logger.error("get_departments task fail " + str(ex.__str__()))

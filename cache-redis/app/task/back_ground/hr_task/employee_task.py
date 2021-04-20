@@ -2,7 +2,7 @@ import json
 import requests
 from datetime import datetime
 from celery.utils.log import get_task_logger
-from .models.employee_controller import EmployeeController
+from app.task.back_ground.models.employee_controller import EmployeeController
 
 logger = get_task_logger(__name__)
 

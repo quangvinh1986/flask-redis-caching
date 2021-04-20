@@ -71,5 +71,8 @@ http://0.0.0.0:5001/myApi/hrApi/departments
   ```
 
 
-Phiên bản nâng c:ao (TO_DO)
-- Cho phép reload cache từ cron-job, các action dùng trong background-task
+Phiên bản nâng cao (DONE: 20210420)
+- Cho phép reload cache từ cron-job (task `reload_department_cache`)
+
+- Viết function demo cho phép các action dùng trong background task sử dụng cache như khi gọi từ API 
+  (task `get_departments`)
