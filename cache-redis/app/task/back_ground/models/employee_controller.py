@@ -60,7 +60,7 @@ class EmployeeController(DBConnection):
                     {'EMPLOYEE_ID': 100, 'FIRST_NAME': 'STEVEN', 'LAST_NAME': 'KING', ...},
                 ]
         """
-        compare_date = datetime.strptime("2020-06-17", "%Y-%m-%d")
+        # compare_date = datetime.strptime("2020-06-17", "%Y-%m-%d")
         select_statement = self.Employee.select() \
             .where(and_(extract('month', self.Employee.c.HIRE_DATE) == compare_date.month,
                         extract('day', self.Employee.c.HIRE_DATE) == compare_date.day)) \
